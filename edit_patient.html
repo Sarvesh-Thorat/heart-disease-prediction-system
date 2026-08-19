@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Patient | Heart Disease Prediction</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            min-height: 100vh;
+            color: #1f2937;
+        }
+
+        /* Header */
+
+        .header {
+           background: linear-gradient(
+                145deg,
+                #20a99d,
+                #078fc7,
+                #075ee8
+            );
+            color: white;
+            padding: 22px 40px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .header h1 {
+            font-size: 27px;
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Main */
+
+        .main-container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Card */
+
+        .edit-card {
+            background: white;
+            border-radius: 15px;
+            padding: 32px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid #1677b8;
+        }
+
+        /* Title */
+
+        .title-section {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #e8f3fb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+        }
+
+        .title-section h2 {
+            font-size: 22px;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .title-section p {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        /* Form */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #1f2937;
+            background: #ffffff;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #1677b8;
+            box-shadow: 0 0 0 3px rgba(22, 119, 184, 0.12);
+        }
+
+        .form-group input:hover {
+            border-color: #9ca3af;
+        }
+
+        /* Patient ID */
+
+        .patient-id {
+            background: #f3f6f9 !important;
+            color: #6b7280 !important;
+            cursor: not-allowed;
+        }
+
+        /* Buttons */
+
+        .button-section {
+            margin-top: 28px;
+        }
+
+        .update-btn {
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            background: linear-gradient(
+                145deg,
+                #20a99d,
+                #078fc7,
+                #075ee8
+            );
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .update-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 12px rgba(15, 76, 129, 0.25);
+        }
+
+        .update-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Back Button */
+
+        .back-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 11px 18px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: white;
+            color: #0f4c81;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #0f4c81;
+            color: white;
+            border-color: #0f4c81;
+        }
+
+        /* Info */
+
+        .info-box {
+            margin-top: 22px;
+            padding: 13px 15px;
+            background: #f0f7fc;
+            border-left: 4px solid #1677b8;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #4b5563;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 23px;
+            }
+
+            .main-container {
+                margin: 25px auto;
+            }
+
+            .edit-card {
+                padding: 22px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="header">
+
+        <div class="header-content">
+
+            <h1>Edit Patient</h1>
+
+            <p>
+                Update and manage patient information
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main Container -->
+
+    <main class="main-container">
+
+        <div class="edit-card">
+
+            <!-- Title -->
+
+            <div class="title-section">
+
+                <div class="icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <h2>Patient Information</h2>
+
+                    <p>
+                        Update the patient's registered details
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Form -->
+
+            <form method="POST">
+
+                <div class="form-group">
+
+                    <label>
+                        Patient Name
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="patient_name"
+                        value="{{ patient[1] }}"
+                        placeholder="Enter patient name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Age
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="number"
+                        name="age"
+                        value="{{ patient[2] }}"
+                        min="1"
+                        max="120"
+                        placeholder="Enter age"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Gender
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="gender"
+                        value="{{ patient[3] }}"
+                        placeholder="Enter gender"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="button-section">
+
+                    <button
+                        type="submit"
+                        class="update-btn"
+                    >
+                        ✓ Update Patient
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <div class="info-box">
+
+                <strong>Note:</strong>
+                Please verify the information before updating the patient record.
+
+            </div>
+
+
+            <!-- Back -->
+
+            <div class="back-section">
+
+                <a
+                    href="/patients"
+                    class="back-btn"
+                >
+                    ← Back to Patient Records
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

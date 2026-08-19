@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | HeartCare AI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f7f9fc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .login-container {
+            width: 950px;
+            min-height: 560px;
+            background: white;
+            border-radius: 18px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
+        }
+
+        /* LEFT SIDE */
+
+        .left-panel {
+            width: 45%;
+            padding: 50px 45px;
+            color: white;
+
+            background: linear-gradient(
+                145deg,
+                #20a99d,
+                #078fc7,
+                #075ee8
+            );
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 55px;
+        }
+
+        .heart {
+            color: #ff4f6d;
+            font-size: 25px;
+            margin-right: 8px;
+        }
+
+        .left-panel h1 {
+            font-size: 38px;
+            line-height: 1.15;
+            margin-bottom: 25px;
+        }
+
+        .description {
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 35px;
+            opacity: 0.95;
+        }
+
+        .features {
+            list-style: none;
+        }
+
+        .features li {
+            margin: 18px 0;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .check {
+            width: 25px;
+            height: 25px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+
+        /* RIGHT SIDE */
+
+        .right-panel {
+            width: 55%;
+            padding: 55px 65px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .user-icon {
+            font-size: 30px;
+            margin-bottom: 18px;
+            color: #535b8e;
+        }
+
+        .right-panel h2 {
+            font-size: 30px;
+            color: #303449;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            color: #3d4055;
+            margin-bottom: 8px;
+        }
+
+        .input-box {
+            width: 100%;
+            height: 48px;
+            border: 1px solid #dfe3ea;
+            border-radius: 8px;
+            padding: 0 15px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+            background: #fff;
+        }
+
+        .input-box:focus {
+            border-color: #159fc0;
+            box-shadow: 0 0 0 3px rgba(21,159,192,0.10);
+        }
+
+        .login-btn {
+            width: 100%;
+            height: 48px;
+            border: none;
+            border-radius: 8px;
+
+            background: linear-gradient(
+                90deg,
+                #159eaa,
+                #078fc5
+            );
+
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 5px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 7px 18px rgba(8,143,197,0.25);
+        }
+
+        .error-message {
+            background: #ffe8e8;
+            color: #c62828;
+            border: 1px solid #ffcaca;
+            border-radius: 7px;
+            padding: 11px 13px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 22px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #078fc5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .secure-text {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 12px;
+            color: #aaa;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .login-container {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .left-panel {
+                width: 100%;
+                padding: 35px;
+            }
+
+            .right-panel {
+                width: 100%;
+                padding: 40px 30px;
+            }
+
+            .logo {
+                margin-bottom: 30px;
+            }
+
+            .left-panel h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <!-- LEFT PANEL -->
+
+    <div class="left-panel">
+
+        <div class="logo">
+            <span class="heart">♥</span>
+            HeartCare 
+        </div>
+
+        <h1>
+            Heart Disease<br>
+            Prediction System
+        </h1>
+
+        <p class="description">
+            Heart disease risk prediction and
+            patient management system designed to assist
+            with efficient patient analysis.
+        </p>
+
+        <ul class="features">
+
+            <li>
+                <span class="check">✓</span>
+                Secure Patient Registration
+            </li>
+
+            <li>
+                <span class="check">✓</span>
+                AI-Based Risk Prediction
+            </li>
+
+            <li>
+                <span class="check">✓</span>
+                Medical Records Management
+            </li>
+
+            <li>
+                <span class="check">✓</span>
+                Prediction Reports
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <!-- RIGHT PANEL -->
+
+    <div class="right-panel">
+
+        <div class="user-icon">♟</div>
+
+        <h2>Welcome Back</h2>
+
+        <p class="subtitle">
+            Login to access the prediction system
+        </p>
+
+
+        <!-- Error message from Flask -->
+
+        {% if error %}
+        <div class="error-message">
+            {{ error }}
+        </div>
+        {% endif %}
+
+
+        <form action="/login" method="POST">
+
+            <div class="form-group">
+
+                <label>Username</label>
+
+                <input
+                    type="text"
+                    name="username"
+                    class="input-box"
+                    placeholder="Enter your username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="input-box"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit" class="login-btn">
+                Login
+            </button>
+
+        </form>
+
+
+        <div class="register-link">
+
+            Don't have an account?
+            <a href="/">
+                Create Account
+            </a>
+
+        </div>
+
+
+        <div class="secure-text">
+            🔒 Your information is securely stored
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

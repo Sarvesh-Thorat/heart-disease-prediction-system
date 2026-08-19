@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Heart Disease Prediction</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #263238;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+              background: linear-gradient(
+                145deg,
+                #20a99d,
+                #078fc7,
+                #075ee8
+            );
+            color: white;
+            padding: 22px 40px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .card-title {
+            text-align: center;
+            margin-bottom: 8px;
+            color: #0d47a1;
+            font-size: 24px;
+        }
+
+        .card-subtitle {
+            text-align: center;
+            color: #78909c;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        /* Form grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #37474f;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cfd8dc;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #1976d2;
+            box-shadow: 0 0 0 3px rgba(25,118,210,0.12);
+        }
+
+        input:hover,
+        select:hover {
+            border-color: #90caf9;
+        }
+
+        /* Button */
+        .button-area {
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .predict-btn {
+            border: none;
+              background: linear-gradient(
+                145deg,
+                #20a99d,
+                #078fc7,
+                #075ee8
+            );
+
+            color: white;
+            padding: 14px 55px;
+            border-radius: 9px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(13,71,161,0.25);
+        }
+
+        .predict-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 16px rgba(13,71,161,0.35);
+        }
+
+        /* Info section */
+        .info-box {
+            margin-top: 25px;
+            padding: 16px;
+            border-left: 4px solid #1976d2;
+            background: #e3f2fd;
+            border-radius: 6px;
+            color: #37474f;
+            font-size: 13px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #78909c;
+            font-size: 13px;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 23px;
+            }
+
+            .container {
+                margin: 20px auto;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .predict-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <h1>❤️ Heart Disease Prediction System</h1>
+            <p>heart disease risk assessment</p>
+        </div>
+    </div>
+
+
+    <!-- Main -->
+    <div class="container">
+
+        <div class="card">
+
+            <h2 class="card-title">Patient Health Assessment</h2>
+
+            <p class="card-subtitle">
+                Enter the patient's medical information to predict heart disease risk
+            </p>
+
+
+            <form action="/predict" method="POST">
+
+                <div class="form-grid">
+
+                    <!-- Patient Name -->
+                    <div class="form-group">
+                        <label>Patient Name</label>
+                        <input
+                            type="text"
+                            name="patient_name"
+                            placeholder="Enter patient name"
+                            required>
+                    </div>
+
+
+                    <!-- Age -->
+                    <div class="form-group">
+                        <label>Age</label>
+                        <input
+                            type="number"
+                            name="age"
+                            placeholder="Enter age"
+                            min="1"
+                            max="120"
+                            required>
+                    </div>
+
+
+                    <!-- Sex -->
+                    <div class="form-group">
+                        <label>Sex</label>
+                        <select name="sex">
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                    </div>
+
+
+                    <!-- Chest Pain -->
+                    <div class="form-group">
+                        <label>Chest Pain Type</label>
+                        <select name="chest_pain_type">
+                            <option value="ATA">ATA - Atypical Angina</option>
+                            <option value="NAP">NAP - Non-Anginal Pain</option>
+                            <option value="ASY">ASY - Asymptomatic</option>
+                            <option value="TA">TA - Typical Angina</option>
+                        </select>
+                    </div>
+
+
+                    <!-- Resting BP -->
+                    <div class="form-group">
+                        <label>Resting Blood Pressure</label>
+                        <input
+                            type="number"
+                            name="resting_bp"
+                            placeholder="mmHg"
+                            required>
+                    </div>
+
+
+                    <!-- Cholesterol -->
+                    <div class="form-group">
+                        <label>Cholesterol</label>
+                        <input
+                            type="number"
+                            name="cholesterol"
+                            placeholder="mg/dL"
+                            required>
+                    </div>
+
+
+                    <!-- Fasting Blood Sugar -->
+                    <div class="form-group">
+                        <label>Fasting Blood Sugar</label>
+                        <select name="fasting_blood_sugar">
+                            <option value="Y">Yes</option>
+                            <option value="N">No</option>
+                        </select>
+                    </div>
+
+
+                    <!-- Resting ECG -->
+                    <div class="form-group">
+                        <label>Resting ECG</label>
+                        <select name="resting_ecg">
+                            <option value="Normal">Normal</option>
+                            <option value="LVH">LVH</option>
+                            <option value="ST">ST</option>
+                        </select>
+                    </div>
+
+
+                    <!-- Maximum Heart Rate -->
+                    <div class="form-group">
+                        <label>Maximum Heart Rate</label>
+                        <input
+                            type="number"
+                            name="max_hr"
+                            placeholder="Maximum heart rate"
+                            required>
+                    </div>
+
+
+                    <!-- Exercise Angina -->
+                    <div class="form-group">
+                        <label>Exercise Angina</label>
+                        <select name="exercise_angina">
+                            <option value="Y">Yes</option>
+                            <option value="N">No</option>
+                        </select>
+                    </div>
+
+
+                    <!-- Oldpeak -->
+                    <div class="form-group">
+                        <label>Oldpeak</label>
+                        <input
+                            type="number"
+                            step="0.1"
+                            name="oldpeak"
+                            placeholder="Enter Oldpeak"
+                            required>
+                    </div>
+
+
+                    <!-- ST Slope -->
+                    <div class="form-group">
+                        <label>ST Slope</label>
+                        <select name="st_slope">
+                            <option value="Up">Up</option>
+                            <option value="Flat">Flat</option>
+                            <option value="Down">Down</option>
+                        </select>
+                    </div>
+
+
+                    <!-- CA -->
+                    <div class="form-group">
+                        <label>CA</label>
+                        <input
+                            type="number"
+                            name="ca"
+                            placeholder="Enter CA value"
+                            required>
+                    </div>
+
+
+                    <!-- Thal -->
+                    <div class="form-group">
+                        <label>Thal</label>
+                        <select name="thal">
+                            <option value="Normal">Normal</option>
+                            <option value="Fixed">Fixed</option>
+                            <option value="Reversible">Reversible</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <!-- Information -->
+                <div class="info-box">
+                    <strong>ℹ️ Note:</strong>
+                    Please enter accurate patient information. The prediction
+                    is intended as a decision-support tool and should not replace
+                    professional medical evaluation.
+                </div>
+
+
+                <!-- Button -->
+                <div class="button-area">
+                    <button type="submit" class="predict-btn">
+                        🔍 Predict Heart Disease Risk
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <div class="footer">
+        © 2026 Heart Disease Prediction System
+    </div>
+
+</body>
+</html>

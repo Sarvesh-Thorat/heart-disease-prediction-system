@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Patient Registration | Heart Disease Prediction</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(135deg,
+                #eaf8f7,
+                #f5f9ff);
+
+            color: #1f2937;
+        }
+
+
+        /* Main Container */
+
+        .container {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 40px 20px;
+        }
+
+
+        /* Registration Card */
+
+        .register-card {
+            width: 100%;
+            max-width: 1000px;
+
+            display: flex;
+
+            background: white;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.12);
+        }
+
+
+        /* Left Side */
+
+        .left-panel {
+            width: 45%;
+
+            padding: 55px 45px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #087f78,
+                    #0ea5a4,
+                    #2563eb
+                );
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+
+            margin-bottom: 55px;
+        }
+
+
+        .logo span {
+            margin-left: 8px;
+        }
+
+
+        .left-panel h1 {
+            font-size: 38px;
+
+            line-height: 1.15;
+
+            margin-bottom: 22px;
+        }
+
+
+        .left-panel p {
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            opacity: 0.95;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* Features */
+
+        .features {
+            margin-top: 10px;
+        }
+
+
+        .feature {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 18px 0;
+
+            font-size: 15px;
+        }
+
+
+        .check {
+            width: 27px;
+            height: 27px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.2);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+
+        /* Right Side */
+
+        .right-panel {
+            width: 55%;
+
+            padding: 45px 55px;
+        }
+
+
+        .form-header {
+            margin-bottom: 28px;
+        }
+
+
+        .form-icon {
+            width: 55px;
+            height: 55px;
+
+            border-radius: 50%;
+
+            background: #e6f7f6;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .form-header h2 {
+            font-size: 30px;
+
+            color: #111827;
+
+            margin-bottom: 8px;
+        }
+
+
+        .form-header p {
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+
+        /* Form */
+
+        .input-row {
+            display: flex;
+
+            gap: 18px;
+        }
+
+
+        .input-group {
+            width: 100%;
+
+            margin-bottom: 18px;
+        }
+
+
+        .input-group label {
+            display: block;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #374151;
+
+            margin-bottom: 7px;
+        }
+
+
+        .input-group input {
+            width: 100%;
+
+            height: 45px;
+
+            padding: 0 14px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.2s;
+
+            background: #fafafa;
+        }
+
+
+        .input-group input:focus {
+            border-color: #0ea5a4;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px rgba(14,165,164,0.12);
+        }
+
+
+        .input-group input::placeholder {
+            color: #9ca3af;
+        }
+
+
+        /* Button */
+
+        .register-btn {
+            width: 100%;
+
+            height: 48px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #087f78,
+                    #0ea5a4
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 8px;
+
+            transition: 0.25s;
+        }
+
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(14,165,164,0.25);
+        }
+
+
+        /* Login Link */
+
+        .login-text {
+            text-align: center;
+
+            margin-top: 22px;
+
+            font-size: 14px;
+
+            color: #6b7280;
+        }
+
+
+        .login-text a {
+            color: #087f78;
+
+            font-weight: bold;
+
+            text-decoration: none;
+        }
+
+
+        .login-text a:hover {
+            text-decoration: underline;
+        }
+
+
+     
+
+        /* Security Text */
+
+        .security {
+            text-align: center;
+
+            margin-top: 20px;
+
+            font-size: 12px;
+
+            color: #9ca3af;
+        }
+
+
+        /* Mobile */
+
+        @media (max-width: 800px) {
+
+            .register-card {
+                flex-direction: column;
+            }
+
+            .left-panel {
+                width: 100%;
+
+                padding: 35px 30px;
+            }
+
+            .right-panel {
+                width: 100%;
+
+                padding: 35px 30px;
+            }
+
+            .logo {
+                margin-bottom: 30px;
+            }
+
+            .left-panel h1 {
+                font-size: 30px;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .input-row {
+                flex-direction: column;
+
+                gap: 0;
+            }
+
+            .left-panel {
+                padding: 30px 22px;
+            }
+
+            .right-panel {
+                padding: 30px 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+    <div class="register-card">
+
+
+        <!-- LEFT PANEL -->
+
+        <div class="left-panel">
+
+            <div class="logo">
+                ❤️ <span>HeartCare</span>
+            </div>
+
+
+            <h1>
+                Heart Disease
+                Prediction System
+            </h1>
+
+
+            <p>
+                Heart disease risk prediction
+                and patient management system designed
+                to assist with efficient patient analysis.
+            </p>
+
+
+            <div class="features">
+
+                <div class="feature">
+                    <div class="check">✓</div>
+                    Secure Patient Registration
+                </div>
+
+                <div class="feature">
+                    <div class="check">✓</div>
+                    AI-Based Risk Prediction
+                </div>
+
+                <div class="feature">
+                    <div class="check">✓</div>
+                    Medical Records Management
+                </div>
+
+                <div class="feature">
+                    <div class="check">✓</div>
+                    Prediction Reports
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT PANEL -->
+
+        <div class="right-panel">
+
+
+            <div class="form-header">
+
+                <div class="form-icon">
+                    👤
+                </div>
+
+                <h2>
+                    Create Account
+                </h2>
+
+                <p>
+                    Register to access the prediction system
+                </p>
+
+            </div>
+
+
+            <!-- ONLY CHANGE: onsubmit validation -->
+
+            <form action="/register"
+                  method="POST"
+                  onsubmit="return validatePassword()">
+
+
+                <!-- Full Name -->
+
+                <div class="input-group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="Full_Name"
+                        placeholder="Enter your full name"
+                        required>
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="input-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        required>
+
+                </div>
+
+
+                <!-- Username -->
+
+                <div class="input-group">
+
+                    <label>
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Choose a username"
+                        required>
+
+                </div>
+
+
+                <!-- Password Row -->
+
+                <div class="input-row">
+
+                    <div class="input-group">
+
+                        <label>
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            required>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>
+                            Confirm Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirm_password"
+                            name="confirm_password"
+                            placeholder="Confirm password"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Button -->
+
+                <button
+                    type="submit"
+                    class="register-btn">
+
+                    Create Account
+
+                </button>
+
+
+            </form>
+
+
+            <div class="login-text">
+
+                Already have an account?
+
+                <a href="/login">
+                    Login
+                </a>
+
+            </div>
+
+
+            <div class="security">
+
+                🔒 Your information is securely stored
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function validatePassword() {
+
+    let password =
+        document.getElementById("password").value;
+
+    let confirmPassword =
+        document.getElementById("confirm_password");
+
+
+
+    if (password !== confirmPassword.value) {
+
+        confirmPassword.setCustomValidity(
+            "Passwords do not match."
+        );
+
+        confirmPassword.reportValidity();
+
+        return false;
+    }
+
+
+    confirmPassword.setCustomValidity("");
+
+    return true;
+}
+
+
+
+
+document.getElementById("confirm_password")
+    .addEventListener("input", function () {
+
+        let password =
+            document.getElementById("password").value;
+
+        if (password === this.value) {
+
+            this.setCustomValidity("");
+
+        } else {
+
+            this.setCustomValidity(
+                "Passwords do not match."
+            );
+
+        }
+
+    });
+
+</script>
+
+
+</body>
+
+</html>
